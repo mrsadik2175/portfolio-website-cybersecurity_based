@@ -1,0 +1,219 @@
+/* ------------------------------------------------------------------
+   styles.css (Fixed)
+   - Eliminates the body and light theme header background gradients for a consistent color.
+   - Keeps the same accent palette you liked.
+   - Adds theme toggle, improved mail button, extra sections styling.
+-------------------------------------------------------------------*/
+:root{
+  --bg: #0b1020;
+  --card: #0f1724;
+  --muted: #9aa6c0;
+  --text: #e6eef8;
+  --accent: #4f46e5;
+  --accent-2: #06b6d4;
+  --glass: rgba(255,255,255,0.03);
+  --radius: 12px;
+  --fw-regular: 400;
+  --fw-strong: 600;
+  --container: 1100px;
+  --gap: 1.25rem;
+  --shadow: 0 6px 24px rgba(2,6,23,0.6);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: dark;
+}
+
+/* Light theme variables (keeps the same accent colors) */
+:root.light {
+  --bg: #f6f8fb;
+  --card: #ffffff;
+  --muted: #5b6b80;
+  --text: #0b1020;
+  --glass: rgba(11,16,32,0.03);
+  --shadow: 0 6px 24px rgba(11,16,32,0.06);
+  color-scheme: light;
+}
+
+/* Reset */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  /* FIX: Changed from a gradient to a solid background color to prevent the unwanted color shift */
+  background-color: var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+  font-size:16px;
+  padding-bottom:60px;
+}
+
+/* Container */
+.container{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:1.25rem;
+}
+
+/* Header */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:60;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(11,16,32,0.6), rgba(11,16,32,0.35));
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+:root.light .site-header{
+  /* FIX: Changed from a subtle gradient to a near-solid background color 
+     for uniformity across the page. Uses a slight opacity for the blur effect. */
+  background-color: rgba(255, 255, 255, 0.98); 
+  border-bottom: 1px solid rgba(11,16,32,0.04);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  gap:var(--gap);
+  justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:0.6rem;text-decoration:none;color:var(--text)}
+.brand-logo{width:44px;height:44px;border-radius:8px;object-fit:cover;background:var(--glass)}
+.brand-name{font-weight:700}
+
+/* Nav */
+.nav{display:flex;gap:1rem}
+.nav-link{color:var(--muted);text-decoration:none;padding:0.5rem 0.6rem;border-radius:8px}
+.nav-link:hover{color:var(--text);background:rgba(255,255,255,0.02)}
+
+/* Header controls */
+.header-controls{display:flex;gap:0.5rem;align-items:center}
+.icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer;color:var(--muted)}
+.icon-btn:hover{color:var(--text);background:rgba(255,255,255,0.02)}
+
+/* Mobile menu */
+.menu-btn{display:none;background:none;border:0;padding:0.5rem;border-radius:8px}
+.hamburger{display:block;width:22px;height:2px;background:var(--text);position:relative}
+.hamburger::before,.hamburger::after{content:"";position:absolute;left:0;width:22px;height:2px;background:var(--text)}
+.hamburger::before{top:-7px} .hamburger::after{top:7px}
+
+/* HERO */
+.hero{padding:3.5rem 0}
+.hero-grid{display:grid;grid-template-columns:1fr 380px;gap:2rem;align-items:center}
+.title{font-size:clamp(1.9rem, 3.2vw, 2.6rem);margin:0 0 0.5rem}
+.subtitle{color:var(--muted);margin:0 0 1rem}
+.accent{color:var(--accent)}
+.typing{margin-bottom:1rem;color:var(--muted)}
+
+.hero-ctas{display:flex;gap:0.75rem;margin:1rem 0}
+.btn{display:inline-flex;align-items:center;gap:0.6rem;padding:0.7rem 1rem;border-radius:10px;text-decoration:none;cursor:pointer;border:1px solid transparent}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;font-weight:700;box-shadow:var(--shadow)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.btn.outline{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:0.5rem 0.8rem}
+.btn.small{padding:0.45rem 0.7rem;font-size:0.95rem}
+
+/* Mail button (styled link) */
+.mail-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.65rem 0.9rem;
+  border-radius:10px;
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.04);
+  text-decoration:none;
+  color:var(--text);
+  font-weight:600;
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+:root.light .mail-btn{border:1px solid rgba(11,16,32,0.06); color:var(--text)}
+.mail-btn:hover{transform:translateY(-3px); box-shadow:0 8px 30px rgba(2,6,23,0.12)}
+
+/* Profile card */
+.card-profile{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:1rem;border-radius:14px;display:flex;gap:1rem;align-items:center;box-shadow:0 8px 30px rgba(2,6,23,0.55)}
+:root.light .card-profile{background:var(--card)}
+.profile-pic{width:96px;height:96px;border-radius:12px;object-fit:cover;flex-shrink:0}
+.profile-meta h3{margin:0 0 0.35rem}
+.profile-meta p{margin:0 0 0.8rem;color:var(--muted)}
+
+/* Quick stats */
+.quick-stats{display:flex;gap:0.6rem;margin-top:0.9rem;flex-wrap:wrap}
+.stat{background:var(--card);padding:0.6rem 0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+:root.light .stat{background:#f7f9fc;border:1px solid rgba(11,16,32,0.04)}
+.stat-num{font-weight:700;display:block}
+.stat-label{color:var(--muted);font-size:0.9rem}
+
+/* Sections */
+.section{padding:2.5rem 0}
+.section-head h2{margin:0 0 0.4rem}
+.section-head p{color:var(--muted);margin:0 0 1rem}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:1fr 320px;gap:1.5rem;align-items:start}
+.about-list{list-style:none;padding:0;margin:1rem 0 0;color:var(--muted)}
+.about-list li{margin:0.45rem 0}
+.about-extra .cta-row{display:flex;gap:0.6rem;margin-top:0.8rem}
+
+/* Projects */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.project-card{background:var(--card);padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.02);transition:transform .12s ease, box-shadow .12s ease}
+:root.light .project-card{background:#fff;border:1px solid rgba(11,16,32,0.04)}
+.project-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(2,6,23,0.18)}
+.project-title{margin:0 0 0.4rem}
+.project-desc{margin:0 0 0.6rem;color:var(--muted)}
+.project-actions{display:flex;gap:0.4rem;flex-wrap:wrap}
+.tag{display:inline-block;padding:0.35rem 0.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);text-decoration:none;color:var(--muted);font-size:0.9rem}
+
+/* Skills */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.skill h4{margin:0 0 0.5rem}
+.progress{background:rgba(255,255,255,0.03);border-radius:999px;padding:6px}
+:root.light .progress{background:#eef2f7}
+.progress span{display:inline-block;height:12px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:calc(var(--p) * 1%);min-width:20px;padding:0 0.5rem;font-weight:600}
+
+/* Certs & testimonials */
+.cert-grid{display:flex;gap:0.9rem;flex-wrap:wrap}
+.cert-card{background:var(--card);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+.test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.testimonial{background:var(--card);padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.02);font-style:italic}
+
+/* Blog */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.post-card{background:var(--card);padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 340px;gap:1.25rem;align-items:start}
+.contact-form label{display:block;margin-bottom:0.8rem}
+.contact-form span{display:block;margin-bottom:0.35rem;color:var(--muted)}
+.contact-form input, .contact-form textarea{
+  width:100%;padding:0.7rem;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)
+}
+:root.light .contact-form input, :root.light .contact-form textarea{border:1px solid rgba(11,16,32,0.06); background:#fff; color:var(--text)}
+.form-actions{display:flex;gap:0.6rem;align-items:center;margin-top:0.5rem}
+.form-msg{margin-top:0.75rem;color:var(--accent-2)}
+
+/* Footer */
+.site-footer{padding:1rem 0;border-top:1px solid rgba(255,255,255,0.03);margin-top:3rem}
+:root.light .site-footer{border-top:1px solid rgba(11,16,32,0.04)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.footer-inner p{margin:0;color:var(--muted)}
+
+/* Responsive */
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr}
+  .about-grid, .contact-grid{grid-template-columns:1fr}
+  .header-inner{gap:0.5rem}
+  .nav{display:none}
+  .menu-btn{display:block}
+}
+
+/* Small mobile tweaks */
+@media (max-width:420px){
+  :root{font-size:15px}
+  .brand-name{display:none}
+}
+
+/* Utility */
+a{color:inherit;}
+
+/* Accessibility focus */
+a:focus, button:focus, input:focus, textarea:focus{outline:3px solid rgba(79,70,229,0.12); outline-offset:2px}
